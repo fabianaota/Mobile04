@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="colorPrimary">#008577</color>
+    <color name="colorPrimaryDark">#00574B</color>
+    <color name="colorAccent">#D81B60</color>
+    <color name="verdePrimario">#63E151</color>
+    <color name="azulSecundario">#0D4FFF</color>
+    <color name="azulSecundarioDark">#0A3FCC</color>
+    <color name="azulClaroMenu">#06277F</color>
+    <color name="azulEscuroMenu">#021B5D</color>
+    <color name="branco">#FFFFFF</color>
+    <color name="preto">#000000</color>
+
+</resources>
