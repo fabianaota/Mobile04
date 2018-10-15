@@ -6,15 +6,9 @@
     android:orientation="vertical"
     tools:context=".fragments.PostsFragment">
 
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:gravity="center"
-        android:text="Fragment com posts" />
-
     <ImageView
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="140dp"
         android:src="@drawable/logo"/>
 
     <TextView
@@ -22,4 +16,12 @@
         android:layout_height="wrap_content"
         android:gravity="center"
         android:text="Fragment com postsFragment com postsFragment com postsFragment com postsFragment com postsFragment com postsFragment com postsFragment com postsFragment com postsFragment com posts" />
+
+    <Button
+        android:id="@+id/button_post_detail_id"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="end"
+        android:text="Detalhes"/>
+
 </LinearLayout>
