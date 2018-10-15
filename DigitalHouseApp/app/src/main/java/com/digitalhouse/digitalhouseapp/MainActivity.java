@@ -10,8 +10,9 @@ import android.widget.TextView;
 
 import com.digitalhouse.digitalhouseapp.fragments.PeopleFragment;
 import com.digitalhouse.digitalhouseapp.fragments.PostsFragment;
+import com.digitalhouse.digitalhouseapp.interfaces.PostClicado;
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends AppCompatActivity implements PostClicado {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -41,5 +42,10 @@ public class MainActivity extends AppCompatActivity {
         FragmentTransaction transaction = manager.beginTransaction();
         transaction.replace(R.id.container_id, new PeopleFragment());
         transaction.commit();
+    }
+
+    @Override
+    public void onButtonClick(String teto) {
+
     }
 }
