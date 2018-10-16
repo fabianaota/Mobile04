@@ -3,6 +3,8 @@ package com.digitalhouse.digitalhouseapp.fragments;
 
 import android.content.Context;
 import android.os.Bundle;
+import android.support.design.widget.FloatingActionButton;
+import android.support.design.widget.Snackbar;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -48,6 +50,12 @@ public class PostsFragment extends Fragment {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_posts, container, false);
 
+        setupOnClickListeners(view);
+
+        return view;
+    }
+
+    private void setupOnClickListeners(View view){
         Button botaoDetalhe = view.findViewById(R.id.button_post_detail_id);
 
         botaoDetalhe.setOnClickListener(new View.OnClickListener() {
@@ -64,6 +72,23 @@ public class PostsFragment extends Fragment {
             }
         });
 
-        return view;
+        FloatingActionButton fab = view.findViewById(R.id.fab_plus_id);
+
+        fab.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Snackbar.make(view, "Novo post", Snackbar.LENGTH_INDEFINITE)
+                        .setAction("Ok", new View.OnClickListener() {
+                            @Override
+                            public void onClick(View view) {
+                                // TODO criar post
+                            }
+                        })
+                        .show();
+            }
+        });
+
+
     }
+
 }

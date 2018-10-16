@@ -40,6 +40,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:onClick="exibirPosts"
+                style="@style/Botao"
                 android:text="Posts" />
 
             <Button
@@ -47,6 +48,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:onClick="exibirPessoas"
+                style="@style/Botao"
                 android:text="Pessoas" />
 
 
@@ -54,24 +56,28 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:onClick="exibirPosts"
+                style="@style/Botao"
                 android:text="Posts" />
 
             <Button
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:onClick="exibirPessoas"
+                style="@style/Botao"
                 android:text="Pessoas" />
 
             <Button
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:onClick="exibirPosts"
+                style="@style/Botao"
                 android:text="Posts" />
 
             <Button
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:onClick="exibirPessoas"
+                style="@style/Botao"
                 android:text="Pessoas" />
         </LinearLayout>
     </HorizontalScrollView>
