@@ -50,7 +50,8 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="8dp"
             android:onClick="loginClicado"
-            android:text="log in" />
+            android:text="log in"
+            android:id="@+id/button_login"/>
 
         <TextView
             android:layout_width="match_parent"
