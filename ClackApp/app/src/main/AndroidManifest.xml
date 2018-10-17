@@ -16,8 +16,10 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".PreferenceActivity"
-            android:theme="@style/AppTheme.NoActionBar"></activity>
+        <activity
+            android:name=".PreferenceActivity"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity android:name=".LoginActivity"></activity>
     </application>
 
 </manifest>

@@ -34,7 +34,7 @@ public class LoginActivity extends AppCompatActivity {
             intent.putExtras(bundle);
             startActivity(intent);
         }else{
-            emailDigitado.setTextColor();
+
             Snackbar.make(buttonLogin, "Email e/ou senha incorretos(s)", Snackbar.LENGTH_INDEFINITE)
                     .setAction("OK, entendi!", new View.OnClickListener() {
                         @Override
