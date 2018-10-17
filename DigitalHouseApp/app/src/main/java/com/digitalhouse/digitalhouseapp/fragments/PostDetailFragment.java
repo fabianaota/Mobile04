@@ -32,9 +32,9 @@ public class PostDetailFragment extends Fragment {
 
         Bundle bundle = getArguments();
 
-        String titulo = bundle.getString(MainActivity.POST_TITLE);
+        //String titulo = bundle.getString(MainActivity.POST_TITLE);
 
-        textViewTitle.setText("O título do post é: " + titulo);
+        //textViewTitle.setText("O título do post é: " + titulo);
 
         return view;
 

@@ -29,7 +29,7 @@ public class LoginActivity extends AppCompatActivity {
 
         Button buttonLogin = findViewById(R.id.button_login_id);
 
-        if(emailDigitado.getText().toString().equals(passwordDigitado.getText().toString().equals("123"))){
+        if(emailDigitado.getText().toString().equals(passwordDigitado.getText().toString())){
             bundle.putString(CHAVE_EMAIL, emailDigitado.getText().toString());
             intent.putExtras(bundle);
             startActivity(intent);
