@@ -24,13 +24,9 @@ public class MainActivity extends AppCompatActivity implements PostsFragment.Pos
         setContentView(R.layout.activity_main);
 
         TextView texto = findViewById(R.id.text_principal);
-
         Intent intent = getIntent();
-
         Bundle bundle = intent.getExtras();
-
         String emailDigitado = bundle.getString(LoginActivity.CHAVE_EMAIL);
-
         texto.setText(emailDigitado);
     }
 
@@ -55,7 +51,6 @@ public class MainActivity extends AppCompatActivity implements PostsFragment.Pos
 
         // Coloco o titulo numa chave chamada POST_TITLE
         bundle.putString(POST_TITLE, post.getTitulo());
-
 
         // Coloco o titulo numa chave chamada POST_TITLE
         bundle.putString(POST_DESCRIPTION, post.getDescricao());
