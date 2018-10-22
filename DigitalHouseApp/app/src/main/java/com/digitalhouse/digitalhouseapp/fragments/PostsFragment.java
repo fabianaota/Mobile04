@@ -2,6 +2,7 @@ package com.digitalhouse.digitalhouseapp.fragments;
 
 
 import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
@@ -11,28 +12,29 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
 
 import com.digitalhouse.digitalhouseapp.R;
 import com.digitalhouse.digitalhouseapp.adapter.RecyclerViewPostAdapter;
 import com.digitalhouse.digitalhouseapp.model.Post;
 
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 
 /**
  * A simple {@link Fragment} subclass.
  */
-public class PostsFragment extends Fragment {
+public class PostsFragment extends Fragment implements RecyclerViewPostAdapter.CardPostClicado {
 
-    public interface PostClicado {
-
-        void onButtonClick(Post post);
-
+    @Override
+    public void onCardClicado(Post post) {
+        listener.goToFragmentDetails(post);
     }
 
-    private PostClicado listener;
+    public interface ComunicacaoPostFragment {
+        void goToFragmentDetails(Post post);
+    }
+
+    private ComunicacaoPostFragment listener;
 
     public PostsFragment() {
         // Required empty public constructor
@@ -42,8 +44,8 @@ public class PostsFragment extends Fragment {
     public void onAttach(Context context) { // context == Activity que contem o Fragment
         super.onAttach(context);
 
-        if(context instanceof PostClicado){
-            listener = (PostClicado) context;
+        if(context instanceof ComunicacaoPostFragment){
+            listener = (ComunicacaoPostFragment) context;
         }else{
             throw new ClassCastException("A activity não é uma instancia de Post Clicado");
         }
@@ -67,7 +69,7 @@ public class PostsFragment extends Fragment {
         RecyclerView recyclerView = view.findViewById(R.id.recyclerview_posts_id);
 
         // Criar e definir adapter
-        RecyclerViewPostAdapter adapter = new RecyclerViewPostAdapter(createPostList());
+        RecyclerViewPostAdapter adapter = new RecyclerViewPostAdapter(createPostList(), this);
         recyclerView.setAdapter(adapter);
 
         // Definir layout manager

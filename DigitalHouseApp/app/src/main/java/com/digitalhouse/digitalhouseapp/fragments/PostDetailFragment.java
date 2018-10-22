@@ -8,7 +8,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
-import com.digitalhouse.digitalhouseapp.MainActivity;
+import com.digitalhouse.digitalhouseapp.HomeActivity;
 import com.digitalhouse.digitalhouseapp.R;
 
 /**
@@ -32,8 +32,8 @@ public class PostDetailFragment extends Fragment {
 
         Bundle bundle = getArguments();
 
-        String titulo = bundle.getString(MainActivity.POST_TITLE);
-        String descricao = bundle.getString(MainActivity.POST_DESCRIPTION);
+        String titulo = bundle.getString(HomeActivity.POST_TITLE);
+        String descricao = bundle.getString(HomeActivity.POST_DESCRIPTION);
 
         textViewTitle.setText("O titulo do post é: " + titulo + "e a descricao é :"+descricao);
 

@@ -2,12 +2,9 @@ package com.digitalhouse.digitalhouseapp;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.Snackbar;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
-import android.view.View;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
@@ -25,7 +22,7 @@ import com.digitalhouse.digitalhouseapp.model.Post;
 
 public class HomeActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener,
-        PostsFragment.PostClicado {
+        PostsFragment.ComunicacaoPostFragment {
 
     public final static String POST_TITLE = "POST_TITLE";
     public final static String POST_DESCRIPTION = "POST_DESCRIPTION";
@@ -113,7 +110,7 @@ public class HomeActivity extends AppCompatActivity
     }
 
     @Override
-    public void onButtonClick(Post post) {
+    public void goToFragmentDetails(Post post) {
         // Crio bundle
         Bundle bundle = new Bundle();
 
