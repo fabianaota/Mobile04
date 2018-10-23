@@ -21,9 +21,7 @@ public class RecyclerViewPostAdapter extends RecyclerView.Adapter<RecyclerViewPo
     private CardPostClicado listener;
 
     public interface CardPostClicado {
-
         void onCardClicado(Post post);
-
     }
 
     public RecyclerViewPostAdapter(List<Post> postList, CardPostClicado listener) {

@@ -47,7 +47,7 @@ public class PostsFragment extends Fragment implements RecyclerViewPostAdapter.C
         if(context instanceof ComunicacaoPostFragment){
             listener = (ComunicacaoPostFragment) context;
         }else{
-            throw new ClassCastException("A activity não é uma instancia de Post Clicado");
+            throw new ClassCastException("A activity não é uma instancia de ComunicacaoPostFragment");
         }
     }
 
