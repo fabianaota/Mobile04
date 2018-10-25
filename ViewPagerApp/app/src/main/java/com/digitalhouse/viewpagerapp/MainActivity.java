@@ -1,5 +1,6 @@
 package com.digitalhouse.viewpagerapp;
 
+import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
@@ -24,6 +25,7 @@ public class MainActivity extends AppCompatActivity {
         fragmentList.add(ColorFragment.getInstance("Fragment 1", R.color.colorPrimary));
         fragmentList.add(ColorFragment.getInstance("Fragment 2", R.color.colorAccent));
         fragmentList.add(ColorFragment.getInstance("Fragment 3", R.color.colorPrimaryDark));
+        fragmentList.add(ColorFragment.getInstance("Novo Fragment", R.color.colorAccent));
 
         ColorViewPagerAdapter adapter = new ColorViewPagerAdapter(getSupportFragmentManager(), fragmentList);
 
@@ -31,5 +33,11 @@ public class MainActivity extends AppCompatActivity {
 
         viewPager.setClipToPadding(false);
         viewPager.setPageMargin(12);
+
+        TabLayout tabLayout = findViewById(R.id.tablayout_id);
+        tabLayout.setupWithViewPager(viewPager);
+
+        viewPager.setCurrentItem(2);
+
     }
 }

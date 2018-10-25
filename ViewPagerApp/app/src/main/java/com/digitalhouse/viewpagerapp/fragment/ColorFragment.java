@@ -16,7 +16,7 @@ import com.digitalhouse.viewpagerapp.R;
  */
 public class ColorFragment extends Fragment {
 
-    private static final String TITULO = "TITULO";
+    public static final String TITULO = "TITULO";
     private static final String COR = "COR";
 
     public ColorFragment() {

@@ -1,26 +1,26 @@
-package com.digitalhouse.viewpagerapp.adapter;
+package com.digitalhouse.digitalhouseapp.adapter;
 
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentStatePagerAdapter;
 
-import com.digitalhouse.viewpagerapp.fragment.ColorFragment;
-
 import java.util.List;
 
-public class ColorViewPagerAdapter extends FragmentStatePagerAdapter {
+public class ViewPagerDigitalHouseAdapter extends FragmentStatePagerAdapter {
 
-    private List<Fragment> fragmentList;
+    List<Fragment> fragmentList;
+    List<String> tituloList;
 
-    public ColorViewPagerAdapter(FragmentManager fm, List<Fragment> fragmentList) {
+    public ViewPagerDigitalHouseAdapter(FragmentManager fm, List<Fragment> fragmentList, List<String> tituloList) {
         super(fm);
         this.fragmentList = fragmentList;
+        this.tituloList = tituloList;
     }
 
     @Override
-    public Fragment getItem(int i) {
-        return fragmentList.get(i);
+    public Fragment getItem(int position) {
+        return fragmentList.get(position);
     }
 
     @Override
@@ -31,6 +31,6 @@ public class ColorViewPagerAdapter extends FragmentStatePagerAdapter {
     @Nullable
     @Override
     public CharSequence getPageTitle(int position) {
-        return fragmentList.get(position).getArguments().getString(ColorFragment.TITULO);
+        return tituloList.get(position);
     }
 }

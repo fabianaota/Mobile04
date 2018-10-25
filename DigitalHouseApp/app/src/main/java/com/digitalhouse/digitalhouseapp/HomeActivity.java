@@ -2,11 +2,13 @@ package com.digitalhouse.digitalhouseapp;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
+import android.support.v4.view.ViewPager;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
@@ -15,10 +17,14 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.TextView;
 
+import com.digitalhouse.digitalhouseapp.adapter.ViewPagerDigitalHouseAdapter;
 import com.digitalhouse.digitalhouseapp.fragments.PeopleFragment;
 import com.digitalhouse.digitalhouseapp.fragments.PostDetailFragment;
 import com.digitalhouse.digitalhouseapp.fragments.PostsFragment;
 import com.digitalhouse.digitalhouseapp.model.Post;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class HomeActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener,
@@ -26,6 +32,8 @@ public class HomeActivity extends AppCompatActivity
 
     public final static String POST_TITLE = "POST_TITLE";
     public final static String POST_DESCRIPTION = "POST_DESCRIPTION";
+
+    private ViewPager viewPager;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -44,12 +52,28 @@ public class HomeActivity extends AppCompatActivity
         NavigationView navigationView = findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
 
-
         TextView texto = navigationView.getHeaderView(0).findViewById(R.id.text_nav_header_user_id);
         Intent intent = getIntent();
         Bundle bundle = intent.getExtras();
         String emailDigitado = bundle.getString(LoginActivity.CHAVE_EMAIL);
         texto.setText(emailDigitado);
+
+        TabLayout tabLayout = findViewById(R.id.tablayout_id);
+
+        viewPager = findViewById(R.id.viewpager_id);
+
+        List<Fragment> fragmentList = new ArrayList<>();
+        fragmentList.add(new PostsFragment());
+        fragmentList.add(new PeopleFragment());
+
+        List<String> tituloList = new ArrayList<>();
+        tituloList.add("Posts");
+        tituloList.add("Pessoas");
+
+        ViewPagerDigitalHouseAdapter adapter = new ViewPagerDigitalHouseAdapter(getSupportFragmentManager(), fragmentList, tituloList);
+        viewPager.setAdapter(adapter);
+
+        tabLayout.setupWithViewPager(viewPager);
     }
 
     @Override
@@ -91,22 +115,14 @@ public class HomeActivity extends AppCompatActivity
         int id = item.getItemId();
 
         if (id == R.id.nav_posts) {
-            replaceFragment(new PostsFragment());
+            viewPager.setCurrentItem(0);
         } else if (id == R.id.nav_people) {
-            replaceFragment(new PeopleFragment());
+            viewPager.setCurrentItem(1);
         }
 
         DrawerLayout drawer = findViewById(R.id.drawer_layout);
         drawer.closeDrawer(GravityCompat.START);
         return true;
-    }
-
-    public void replaceFragment(Fragment fragment){
-        FragmentManager manager = getSupportFragmentManager();
-        FragmentTransaction transaction = manager.beginTransaction();
-        transaction.replace(R.id.container_id, fragment);
-        transaction.commit();
-
     }
 
     @Override
@@ -132,6 +148,9 @@ public class HomeActivity extends AppCompatActivity
 
         // Através da transaction eu troco o fragment do container
         transaction.replace(R.id.container_id, detailFragment);
+
+        // Adicionar ao backstack
+        transaction.addToBackStack(null);
 
         // Efetivo a transacao
         transaction.commit();
