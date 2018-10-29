@@ -1,15 +1,26 @@
 package com.digitalhouse.digitalhouseapp.model;
 
+import com.google.gson.annotations.SerializedName;
+
 import java.io.Serializable;
 import java.util.Date;
 
 public class Post implements Serializable {
 
+    @SerializedName("title")
     private String titulo;
+
+    @SerializedName("author")
     private String autor;
+
+    @SerializedName("description")
     private String descricao;
+
+    @SerializedName("imageURL")
     private String imagemUrl;
-    private Date dataCriacao;
+
+    @SerializedName("date")
+    private String dataCriacao;
 
     public String getTitulo() {
         return titulo;
@@ -43,11 +54,11 @@ public class Post implements Serializable {
         this.imagemUrl = imagemUrl;
     }
 
-    public Date getDataCriacao() {
+    public String getDataCriacao() {
         return dataCriacao;
     }
 
-    public void setDataCriacao(Date dataCriacao) {
+    public void setDataCriacao(String dataCriacao) {
         this.dataCriacao = dataCriacao;
     }
 }

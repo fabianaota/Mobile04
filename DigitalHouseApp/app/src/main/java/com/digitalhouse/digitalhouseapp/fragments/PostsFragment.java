@@ -16,6 +16,7 @@ import android.view.ViewGroup;
 import com.digitalhouse.digitalhouseapp.R;
 import com.digitalhouse.digitalhouseapp.adapter.RecyclerViewPostAdapter;
 import com.digitalhouse.digitalhouseapp.model.Post;
+import com.digitalhouse.digitalhouseapp.model.dao.PostDAO;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -68,39 +69,14 @@ public class PostsFragment extends Fragment implements RecyclerViewPostAdapter.C
 
         RecyclerView recyclerView = view.findViewById(R.id.recyclerview_posts_id);
 
+        PostDAO dao = new PostDAO();
+
         // Criar e definir adapter
-        RecyclerViewPostAdapter adapter = new RecyclerViewPostAdapter(createPostList(), this);
+        RecyclerViewPostAdapter adapter = new RecyclerViewPostAdapter(dao.getPostList(getContext()), this);
         recyclerView.setAdapter(adapter);
 
         // Definir layout manager
         recyclerView.setLayoutManager(new LinearLayoutManager(view.getContext()));
-    }
-
-    // MOCK - Simulação da busca na API ou no banco de dados
-    private List<Post> createPostList(){
-        List<Post> postList = new ArrayList<>();
-
-        Post post = new Post();
-        post.setTitulo("Nova turma iniciada");
-        post.setDescricao("Em outubro começou a nova turma de Marketing");
-        postList.add(post);
-
-        Post post1 = new Post();
-        post1.setTitulo("Estreia do novo cardápio");
-        post1.setDescricao("A cafeteria agora tem um novo cardápior de almoço");
-        postList.add(post1);
-
-        Post post2 = new Post();
-        post2.setTitulo("Inscrevam-se na Mentoria de Carreira");
-        post2.setDescricao("Através do email mentoria@digitalhouse.com.br, inscreva-se!!");
-        postList.add(post2);
-
-        Post post3 = new Post();
-        post3.setTitulo("Lembrete: Estudar Recycler View");
-        post3.setDescricao("Não esquecer de estudar Recycler View no Co-Learning");
-        postList.add(post3);
-
-        return postList;
     }
 
     private void setupOnClickListeners(View view){
