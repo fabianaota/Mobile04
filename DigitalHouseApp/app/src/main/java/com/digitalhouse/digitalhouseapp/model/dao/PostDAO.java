@@ -6,6 +6,8 @@ import android.content.res.AssetManager;
 import android.util.Log;
 
 import com.digitalhouse.digitalhouseapp.model.Post;
+import com.digitalhouse.digitalhouseapp.service.RetrofitService;
+import com.digitalhouse.digitalhouseapp.service.ServiceListener;
 import com.google.gson.Gson;
 
 import java.io.BufferedReader;
@@ -16,11 +18,36 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
+
 public class PostDAO {
 
-    public List<Post> getPostList(Context context) {
+    public List<Post> getPostList(Context context, final ServiceListener listener) {
         List<Post> postList = new ArrayList<>();
 
+        Call<List<Post>> call = RetrofitService.getPostApi().getPosts();
+
+        call.enqueue(new Callback<List<Post>>() {
+
+            @Override
+            public void onResponse(Call<List<Post>> call, Response<List<Post>> response) {
+                if(response.body() != null){
+                    listener.onSuccess(response.body());
+                }
+            }
+
+            @Override
+            public void onFailure(Call<List<Post>> call, Throwable t) {
+                listener.onError(t);
+            }
+        });
+
+        return postList;
+    }
+
+    private List<Post> getLocalPosts(Context context) {
         try {
             // Abrir arquivo
             AssetManager manager = context.getAssets();
@@ -37,13 +64,12 @@ public class PostDAO {
             Post[] postArray = gson.fromJson(bufferedReader, Post[].class);
 
             // converte array para ArrayList
-            postList = Arrays.asList(postArray);
+            return Arrays.asList(postArray);
 
         } catch (IOException exception) {
             Log.e("PostDAO", "Erro ao ler arquivo");
         }
-
-        return postList;
+        return new ArrayList<>();
     }
 
 }

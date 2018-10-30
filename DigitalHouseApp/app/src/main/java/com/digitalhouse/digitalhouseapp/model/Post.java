@@ -16,7 +16,7 @@ public class Post implements Serializable {
     @SerializedName("description")
     private String descricao;
 
-    @SerializedName("imageURL")
+    @SerializedName("imageUrl")
     private String imagemUrl;
 
     @SerializedName("date")

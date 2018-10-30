@@ -11,6 +11,7 @@ import android.widget.TextView;
 
 import com.digitalhouse.digitalhouseapp.R;
 import com.digitalhouse.digitalhouseapp.model.Post;
+import com.squareup.picasso.Picasso;
 
 import java.util.List;
 
@@ -48,6 +49,11 @@ public class RecyclerViewPostAdapter extends RecyclerView.Adapter<RecyclerViewPo
         return postList.size();
     }
 
+    public void setPostList(List<Post> postList){
+        this.postList = postList;
+        notifyDataSetChanged();
+    }
+
     class ViewHolder extends RecyclerView.ViewHolder {
 
         private TextView titulo;
@@ -65,6 +71,10 @@ public class RecyclerViewPostAdapter extends RecyclerView.Adapter<RecyclerViewPo
         public void bind(final Post post) {
             titulo.setText(post.getTitulo());
             descricao.setText(post.getDescricao());
+
+            Picasso.get()
+                    .load(post.getImagemUrl())
+                    .into(imagem);
 
             imagem.setOnClickListener(new View.OnClickListener() {
                 @Override

@@ -17,6 +17,7 @@ import com.digitalhouse.digitalhouseapp.R;
 import com.digitalhouse.digitalhouseapp.adapter.RecyclerViewPostAdapter;
 import com.digitalhouse.digitalhouseapp.model.Post;
 import com.digitalhouse.digitalhouseapp.model.dao.PostDAO;
+import com.digitalhouse.digitalhouseapp.service.ServiceListener;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -24,7 +25,11 @@ import java.util.List;
 /**
  * A simple {@link Fragment} subclass.
  */
-public class PostsFragment extends Fragment implements RecyclerViewPostAdapter.CardPostClicado {
+public class PostsFragment extends Fragment implements RecyclerViewPostAdapter.CardPostClicado,
+        ServiceListener {
+
+    private RecyclerViewPostAdapter adapter;
+    private RecyclerView recyclerView;
 
     @Override
     public void onCardClicado(Post post) {
@@ -45,10 +50,11 @@ public class PostsFragment extends Fragment implements RecyclerViewPostAdapter.C
     public void onAttach(Context context) { // context == Activity que contem o Fragment
         super.onAttach(context);
 
-        if(context instanceof ComunicacaoPostFragment){
+        if (context instanceof ComunicacaoPostFragment) {
             listener = (ComunicacaoPostFragment) context;
-        }else{
-            throw new ClassCastException("A activity não é uma instancia de ComunicacaoPostFragment");
+        } else {
+            throw new ClassCastException("A activity não é uma instancia de " +
+                    "ComunicacaoPostFragment");
         }
     }
 
@@ -65,21 +71,21 @@ public class PostsFragment extends Fragment implements RecyclerViewPostAdapter.C
         return view;
     }
 
-    private void setupRecyclerView(View view){
+    private void setupRecyclerView(View view) {
 
-        RecyclerView recyclerView = view.findViewById(R.id.recyclerview_posts_id);
+        recyclerView = view.findViewById(R.id.recyclerview_posts_id);
 
         PostDAO dao = new PostDAO();
 
         // Criar e definir adapter
-        RecyclerViewPostAdapter adapter = new RecyclerViewPostAdapter(dao.getPostList(getContext()), this);
+        adapter = new RecyclerViewPostAdapter(dao.getPostList(getContext(), this), this);
         recyclerView.setAdapter(adapter);
 
         // Definir layout manager
         recyclerView.setLayoutManager(new LinearLayoutManager(view.getContext()));
     }
 
-    private void setupOnClickListeners(View view){
+    private void setupOnClickListeners(View view) {
         FloatingActionButton fab = view.findViewById(R.id.fab_plus_id);
 
         fab.setOnClickListener(new View.OnClickListener() {
@@ -95,6 +101,17 @@ public class PostsFragment extends Fragment implements RecyclerViewPostAdapter.C
                         .show();
             }
         });
+    }
+
+    @Override
+    public void onSuccess(Object object) {
+        List<Post> postList = (List<Post>) object;
+        adapter.setPostList(postList);
+    }
+
+    @Override
+    public void onError(Throwable throwable) {
+        Snackbar.make(recyclerView, throwable.getMessage(), Snackbar.LENGTH_LONG).show();
     }
 
 }
