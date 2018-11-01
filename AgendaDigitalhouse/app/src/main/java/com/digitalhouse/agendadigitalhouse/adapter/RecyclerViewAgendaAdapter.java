@@ -41,6 +41,11 @@ public class RecyclerViewAgendaAdapter extends RecyclerView.Adapter<RecyclerView
         notifyItemChanged(getItemCount());
     }
 
+    public void deleteAll() {
+        contatoList.clear();
+        notifyDataSetChanged();
+    }
+
     class ViewHolder extends RecyclerView.ViewHolder {
 
         TextView textNome;
