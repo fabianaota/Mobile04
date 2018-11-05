@@ -78,7 +78,7 @@ public class PostsFragment extends Fragment implements RecyclerViewPostAdapter.C
         PostDAO dao = new PostDAO();
 
         // Criar e definir adapter
-        adapter = new RecyclerViewPostAdapter(dao.getPostList(getContext(), this), this);
+        adapter = new RecyclerViewPostAdapter(dao.getPostList(getContext(), this, 0), this);
         recyclerView.setAdapter(adapter);
 
         // Definir layout manager

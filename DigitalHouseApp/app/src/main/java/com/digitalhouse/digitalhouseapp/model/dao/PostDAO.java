@@ -1,6 +1,5 @@
 package com.digitalhouse.digitalhouseapp.model.dao;
 
-import android.app.Activity;
 import android.content.Context;
 import android.content.res.AssetManager;
 import android.util.Log;
@@ -24,10 +23,12 @@ import retrofit2.Response;
 
 public class PostDAO {
 
-    public List<Post> getPostList(Context context, final ServiceListener listener) {
+    public static final int POST_LIMIT = 3;
+
+    public List<Post> getPostList(Context context, final ServiceListener listener, int offset) {
         List<Post> postList = new ArrayList<>();
 
-        Call<List<Post>> call = RetrofitService.getPostApi().getPosts();
+        Call<List<Post>> call = RetrofitService.getPostApi().getPostsPage(offset, POST_LIMIT);
 
         call.enqueue(new Callback<List<Post>>() {
 
