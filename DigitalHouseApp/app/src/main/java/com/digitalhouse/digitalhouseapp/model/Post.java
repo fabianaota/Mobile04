@@ -5,8 +5,13 @@ import com.google.gson.annotations.SerializedName;
 import java.io.Serializable;
 import java.util.Date;
 
+// POJO - Plain Old Java Object
+// No modelo MVC as classes do tipo POJO fazem parte da Model (Model View Controller)
+// e representam os dados (modelo) do aplicativo
 public class Post implements Serializable {
 
+    // O nome do atributo deve ser igual ao retornado da API
+    // Se for diferente, é necessário utilizar o @SerializedName("nomeDoAtributoNaAPI")
     @SerializedName("title")
     private String titulo;
 

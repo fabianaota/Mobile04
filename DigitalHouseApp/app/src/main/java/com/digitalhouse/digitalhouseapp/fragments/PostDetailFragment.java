@@ -25,11 +25,13 @@ public class PostDetailFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        // Inflate the layout for this fragment
+        // Define o layout XML do fragment
         View view = inflater.inflate(R.layout.fragment_post_detail, container, false);
 
+        // Busca uma view por ID
         TextView textViewTitle = view.findViewById(R.id.text_view_title_post_id);
 
+        // Através do bundle buscar o titulo e a descrição do Post
         Bundle bundle = getArguments();
 
         String titulo = bundle.getString(HomeActivity.POST_TITLE);

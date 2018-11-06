@@ -30,6 +30,7 @@ public class HomeActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener,
         PostsFragment.ComunicacaoPostFragment {
 
+    // Constantes que servem de chave para o bundle (comunicação de Activity com Fragment)
     public final static String POST_TITLE = "POST_TITLE";
     public final static String POST_DESCRIPTION = "POST_DESCRIPTION";
 
@@ -39,9 +40,13 @@ public class HomeActivity extends AppCompatActivity
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home);
+
+        // Busca a toolbar. Atenção na hora de fazer o import. Devemos utilizar o toolbar de support
+        // para que não haja incompatibilidade com versões antigas o Android
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
+        // Setup do navigation Drawer
         DrawerLayout drawer = findViewById(R.id.drawer_layout);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
                 this, drawer, toolbar, R.string.navigation_drawer_open, R.string
@@ -49,35 +54,42 @@ public class HomeActivity extends AppCompatActivity
         drawer.addDrawerListener(toggle);
         toggle.syncState();
 
+        // Setup do navigation view
         NavigationView navigationView = findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
 
+        // Busca os dados que vieram no bundle (comunicação entre activities Login -> Home)
         TextView texto = navigationView.getHeaderView(0).findViewById(R.id.text_nav_header_user_id);
         Intent intent = getIntent();
         Bundle bundle = intent.getExtras();
         String emailDigitado = bundle.getString(LoginActivity.CHAVE_EMAIL);
         texto.setText(emailDigitado);
 
+        // Setup do Tablayout e ViewPager
         TabLayout tabLayout = findViewById(R.id.tablayout_id);
-
         viewPager = findViewById(R.id.viewpager_id);
 
+        // criação dos fragments do Tablayout/ViewPager
         List<Fragment> fragmentList = new ArrayList<>();
         fragmentList.add(new PostsFragment());
         fragmentList.add(new PeopleFragment());
 
+        // criação dos titulos do Tablayout
         List<String> tituloList = new ArrayList<>();
         tituloList.add("Posts");
         tituloList.add("Pessoas");
 
+        // Criação do adapter do view pager
         ViewPagerDigitalHouseAdapter adapter = new ViewPagerDigitalHouseAdapter(getSupportFragmentManager(), fragmentList, tituloList);
         viewPager.setAdapter(adapter);
 
+        // Associar o tablayout ao viewpager
         tabLayout.setupWithViewPager(viewPager);
     }
 
     @Override
     public void onBackPressed() {
+        // Quando o botão back for pressionado, fechar o navigation drawer (se ele estiver aberto)
         DrawerLayout drawer = findViewById(R.id.drawer_layout);
         if (drawer.isDrawerOpen(GravityCompat.START)) {
             drawer.closeDrawer(GravityCompat.START);
@@ -114,6 +126,7 @@ public class HomeActivity extends AppCompatActivity
         // Handle navigation view item clicks here.
         int id = item.getItemId();
 
+        // Se algum item for selecionado no navigation drawer, exibir o fragment correspondente
         if (id == R.id.nav_posts) {
             viewPager.setCurrentItem(0);
         } else if (id == R.id.nav_people) {

@@ -10,6 +10,9 @@ import retrofit2.http.POST;
 import retrofit2.http.PUT;
 import retrofit2.http.Query;
 
+// Esta interface não precisa ser implementada
+// É utilizada na configuração do Retrofit (RetrofitService) para fazer as chamadas na API
+// Deve ser separada de acordo com o Model utilizado
 public interface PostAPI {
 
     @GET("/posts")

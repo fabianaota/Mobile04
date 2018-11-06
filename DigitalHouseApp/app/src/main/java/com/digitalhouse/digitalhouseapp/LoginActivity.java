@@ -19,9 +19,12 @@ public class LoginActivity extends AppCompatActivity {
         setContentView(R.layout.activity_login);
     }
 
+    // Metodo definido no onClick do XML (activity_login.xml)
     public void loginClicado(View view) {
+        // Criar um intent para navegação para home
         Intent intent = new Intent(this, HomeActivity.class);
 
+        // Criar um bundle (pacote) para enviar os dados
         Bundle bundle = new Bundle();
 
         final TextInputEditText emailDigitado = findViewById(R.id.edit_text_email_id);
@@ -29,11 +32,16 @@ public class LoginActivity extends AppCompatActivity {
 
         Button buttonLogin = findViewById(R.id.button_login_id);
 
+        // Verificação (mock/fake) se o email digitado é igual a senha digitada
+        // Para comparar os valores digitados é necessário chamar o método getText().toString()
+        // dos campos do tipo TextInputEditText
         if (emailDigitado.getText().toString().equals(passwordDigitado.getText().toString())) {
+            // Se passar na validação, enviar o e-mail digital através do bundle
             bundle.putString(CHAVE_EMAIL, emailDigitado.getText().toString());
             intent.putExtras(bundle);
             startActivity(intent);
         } else {
+            // Se não passar na validação, mudar a cor do campos e exiber msg de erro
             emailDigitado.setTextColor(getResources().getColor(R.color.error));
             passwordDigitado.setTextColor(getResources().getColor(R.color.error));
 
