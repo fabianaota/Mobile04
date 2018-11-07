@@ -37,10 +37,28 @@ public class PostsFragment extends Fragment implements RecyclerViewPostAdapter.C
     private int offset = 0;
 
     @Override
-    public void onCardClicado(Post post) {
+    public void onImagemClicada(Post post) {
         // Este método é da implementação da interface CardPostClicado e faz parte da comunicação
         // do RecyclerView com este Fragment
         listener.goToFragmentDetails(post);
+    }
+
+    @Override
+    public void onShareClicado(Post post) {
+        //Criamos um share de tipo ACTION_SENT
+        Intent share = new Intent(android.content.Intent.ACTION_SEND);
+
+        //Indicamos que vamos compartilhar texto
+        share.setType("text/plain");
+
+        //Adicionamos um título
+        share.putExtra(Intent.EXTRA_SUBJECT, post.getTitulo());
+
+        //Adicionamos o texto a ser compartilhado (pode ser um link também)
+        share.putExtra(Intent.EXTRA_TEXT, post.getDescricao());
+
+        //Criamos um start para compartilhar o conteúdo.
+        startActivity(Intent.createChooser(share, "Compartilhar post!"));
     }
 
     // Esta interface é da comunicação entre Fragments
