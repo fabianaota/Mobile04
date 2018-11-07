@@ -25,6 +25,7 @@ public class RecyclerViewPostAdapter extends RecyclerView.Adapter<RecyclerViewPo
     // Interface/listener para comunição dos itens da lista com a Activity/Fragment
     public interface CardPostClicado {
         void onCardClicado(Post post);
+        void onShareClicado(Post post);
     }
 
     // Propriedade do tipo da interface criada que sera usada efetivamente na comunicação
@@ -77,7 +78,7 @@ public class RecyclerViewPostAdapter extends RecyclerView.Adapter<RecyclerViewPo
         private TextView titulo;
         private TextView descricao;
         private ImageView imagem;
-
+private ImageView share;
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
 
@@ -85,6 +86,7 @@ public class RecyclerViewPostAdapter extends RecyclerView.Adapter<RecyclerViewPo
             titulo = itemView.findViewById(R.id.text_view_title_post_id);
             descricao = itemView.findViewById(R.id.text_post_description_id);
             imagem = itemView.findViewById(R.id.image_view_post_id);
+            share = itemView.findViewById(R.id.imageView2);
         }
 
         public void bind(final Post post) {
@@ -105,6 +107,13 @@ public class RecyclerViewPostAdapter extends RecyclerView.Adapter<RecyclerViewPo
                 @Override
                 public void onClick(View view) {
                     listener.onCardClicado(post);
+                }
+            });
+
+            share.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    listener.onShareClicado(post);
                 }
             });
         }

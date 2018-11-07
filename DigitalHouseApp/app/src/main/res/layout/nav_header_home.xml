@@ -18,6 +18,7 @@
         android:layout_height="100dp"
         android:src="@drawable/logo"
         app:civ_border_color="@color/colorPrimaryDark"
+        android:id="@+id/circle_profile_id"
         app:civ_border_width="2dp"/>
 
     <TextView

@@ -3,6 +3,7 @@ package com.digitalhouse.digitalhouseapp.fragments;
 
 import android.content.Context;
 import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
@@ -19,9 +20,15 @@ import com.digitalhouse.digitalhouseapp.adapter.RecyclerViewPostAdapter;
 import com.digitalhouse.digitalhouseapp.model.Post;
 import com.digitalhouse.digitalhouseapp.model.dao.PostDAO;
 import com.digitalhouse.digitalhouseapp.service.ServiceListener;
+import com.facebook.CallbackManager;
+import com.facebook.FacebookSdk;
+import com.facebook.share.model.ShareLinkContent;
+import com.facebook.share.widget.ShareDialog;
 
 import java.util.ArrayList;
 import java.util.List;
+
+import static com.facebook.FacebookSdk.getApplicationContext;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -41,6 +48,17 @@ public class PostsFragment extends Fragment implements RecyclerViewPostAdapter.C
         // Este método é da implementação da interface CardPostClicado e faz parte da comunicação
         // do RecyclerView com este Fragment
         listener.goToFragmentDetails(post);
+    }
+
+    @Override
+    public void onShareClicado(Post post) {
+        ShareDialog shareDialog = new ShareDialog(this);
+
+        ShareLinkContent content = new ShareLinkContent.Builder()
+                .setContentUrl(Uri.parse(post.getImagemUrl()))
+                .setQuote(post.getTitulo())
+                .build();
+        shareDialog.show(content);
     }
 
     // Esta interface é da comunicação entre Fragments

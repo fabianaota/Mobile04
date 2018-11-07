@@ -15,6 +15,8 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.digitalhouse.digitalhouseapp.adapter.ViewPagerDigitalHouseAdapter;
@@ -22,6 +24,10 @@ import com.digitalhouse.digitalhouseapp.fragments.PeopleFragment;
 import com.digitalhouse.digitalhouseapp.fragments.PostDetailFragment;
 import com.digitalhouse.digitalhouseapp.fragments.PostsFragment;
 import com.digitalhouse.digitalhouseapp.model.Post;
+import com.facebook.FacebookSdk;
+import com.facebook.Profile;
+import com.facebook.appevents.AppEventsLogger;
+import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -64,6 +70,9 @@ public class HomeActivity extends AppCompatActivity
         Bundle bundle = intent.getExtras();
         String emailDigitado = bundle.getString(LoginActivity.CHAVE_EMAIL);
         texto.setText(emailDigitado);
+
+        ImageView image = navigationView.getHeaderView(0).findViewById(R.id.circle_profile_id);
+        Picasso.get().load(Profile.getCurrentProfile().getProfilePictureUri(200, 200)).into(image);
 
         // Setup do Tablayout e ViewPager
         TabLayout tabLayout = findViewById(R.id.tablayout_id);
