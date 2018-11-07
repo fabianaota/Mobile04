@@ -3,6 +3,7 @@ package com.digitalhouse.digitalhouseapp.fragments;
 
 import android.content.Context;
 import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
@@ -19,6 +20,9 @@ import com.digitalhouse.digitalhouseapp.adapter.RecyclerViewPostAdapter;
 import com.digitalhouse.digitalhouseapp.model.Post;
 import com.digitalhouse.digitalhouseapp.model.dao.PostDAO;
 import com.digitalhouse.digitalhouseapp.service.ServiceListener;
+import com.facebook.share.model.ShareHashtag;
+import com.facebook.share.model.ShareLinkContent;
+import com.facebook.share.widget.ShareDialog;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -45,8 +49,28 @@ public class PostsFragment extends Fragment implements RecyclerViewPostAdapter.C
 
     @Override
     public void onShareClicado(Post post) {
+        // Cria dialog de share do Facebook
+        ShareDialog dialog = new ShareDialog(this);
+
+        // Cria um objeto ShareLinkContent para compartilhamento (SDK Facebook - necessario Gradle)
+        ShareLinkContent content = new ShareLinkContent.Builder()
+                .setContentUrl(Uri.parse(post.getImagemUrl())) // -> A URL (link) a ser compartilhada
+                .setShareHashtag(new ShareHashtag.Builder() // -> É opcional incluir hashtags
+                        .setHashtag("#DigitalHouse")
+                        .build())
+                .setQuote(post.getTitulo()) // -> É opcional incluir uma citação
+                .build();
+
+        // Usar o método show do dialog do facebook para compartilhar
+        dialog.show(content);
+
+        // Implementação do share nativo
+//        shareNativo(post);
+    }
+
+    private void shareNativo(Post post) {
         //Criamos um share de tipo ACTION_SENT
-        Intent share = new Intent(android.content.Intent.ACTION_SEND);
+        Intent share = new Intent(Intent.ACTION_SEND);
 
         //Indicamos que vamos compartilhar texto
         share.setType("text/plain");
