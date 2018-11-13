@@ -67,7 +67,6 @@ public class HomeActivity extends AppCompatActivity
 
         // Setup do Tablayout e ViewPager
         TabLayout tabLayout = findViewById(R.id.tablayout_id);
-        viewPager = findViewById(R.id.viewpager_id);
 
         // criação dos fragments do Tablayout/ViewPager
         List<Fragment> fragmentList = new ArrayList<>();
@@ -81,6 +80,8 @@ public class HomeActivity extends AppCompatActivity
 
         // Criação do adapter do view pager
         ViewPagerDigitalHouseAdapter adapter = new ViewPagerDigitalHouseAdapter(getSupportFragmentManager(), fragmentList, tituloList);
+
+        viewPager = findViewById(R.id.viewpager_id);
         viewPager.setAdapter(adapter);
 
         // Associar o tablayout ao viewpager
@@ -131,6 +132,9 @@ public class HomeActivity extends AppCompatActivity
             viewPager.setCurrentItem(0);
         } else if (id == R.id.nav_people) {
             viewPager.setCurrentItem(1);
+        } else if (id == R.id.nav_location){
+            Intent intent = new Intent(this, MapsActivity.class);
+            startActivity(intent);
         }
 
         DrawerLayout drawer = findViewById(R.id.drawer_layout);

@@ -3,6 +3,12 @@
     package="com.digitalhouse.digitalhouseapp">
 
     <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+    <uses-permission android:name="android.permission. ACCESS_COARSE_LOCATION" />
+
+    <uses-sdk
+        android:minSdkVersion="8"
+        android:targetSdkVersion="17" />
 
     <application
         android:allowBackup="true"
@@ -31,11 +37,17 @@
 
         <activity android:name="com.facebook.FacebookActivity" />
 
+        <activity android:name=".MapsActivity" />
+
         <meta-data android:name="com.facebook.sdk.ApplicationId" android:value="@string/facebook_app_id"/>
 
         <provider android:authorities="com.facebook.app.FacebookContentProvider254413478562915"
             android:name="com.facebook.FacebookContentProvider"
             android:exported="true"/>
+
+        <meta-data
+            android:name="com.google.android.geo.API_KEY"
+            android:value="@string/google_maps_key" />
 
     </application>
 

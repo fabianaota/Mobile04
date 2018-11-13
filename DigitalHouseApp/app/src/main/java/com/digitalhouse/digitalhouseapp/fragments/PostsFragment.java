@@ -49,23 +49,23 @@ public class PostsFragment extends Fragment implements RecyclerViewPostAdapter.C
 
     @Override
     public void onShareClicado(Post post) {
-        // Cria dialog de share do Facebook
-        ShareDialog dialog = new ShareDialog(this);
-
-        // Cria um objeto ShareLinkContent para compartilhamento (SDK Facebook - necessario Gradle)
-        ShareLinkContent content = new ShareLinkContent.Builder()
-                .setContentUrl(Uri.parse(post.getImagemUrl())) // -> A URL (link) a ser compartilhada
-                .setShareHashtag(new ShareHashtag.Builder() // -> É opcional incluir hashtags
-                        .setHashtag("#DigitalHouse")
-                        .build())
-                .setQuote(post.getTitulo()) // -> É opcional incluir uma citação
-                .build();
-
-        // Usar o método show do dialog do facebook para compartilhar
-        dialog.show(content);
+//        // Cria dialog de share do Facebook
+//        ShareDialog dialog = new ShareDialog(this);
+//
+//        // Cria um objeto ShareLinkContent para compartilhamento (SDK Facebook - necessario Gradle)
+//        ShareLinkContent content = new ShareLinkContent.Builder()
+//                .setContentUrl(Uri.parse(post.getImagemUrl())) // -> A URL (link) a ser compartilhada
+//                .setShareHashtag(new ShareHashtag.Builder() // -> É opcional incluir hashtags
+//                        .setHashtag("#DigitalHouse")
+//                        .build())
+//                .setQuote(post.getTitulo()) // -> É opcional incluir uma citação
+//                .build();
+//
+//        // Usar o método show do dialog do facebook para compartilhar
+//        dialog.show(content);
 
         // Implementação do share nativo
-//        shareNativo(post);
+        shareNativo(post);
     }
 
     private void shareNativo(Post post) {
