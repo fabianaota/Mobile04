@@ -9,6 +9,18 @@
     android:orientation="vertical"
     android:gravity="center">
 
+
+    <ImageView
+        android:layout_width="100dp"
+        android:layout_height="100dp"
+        android:id="@+id/image_user_id"/>
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Trocar imagem"
+        android:id="@+id/button_change_image_id"/>
+
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
