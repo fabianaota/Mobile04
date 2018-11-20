@@ -31,8 +31,12 @@ import com.google.firebase.storage.UploadTask;
 import com.squareup.picasso.Picasso;
 
 import java.io.ByteArrayOutputStream;
+import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collection;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.Date;
 import java.util.List;
 import java.util.Map;
@@ -50,6 +54,8 @@ public class MainActivity extends AppCompatActivity {
     FirebaseStorage storage = FirebaseStorage.getInstance();
     private ImageView imageUser;
     static final int REQUEST_IMAGE_CAPTURE = 1;
+    private StorageReference storageRef;
+    private StorageReference imagesRef;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -90,9 +96,20 @@ public class MainActivity extends AppCompatActivity {
                 GenericTypeIndicator<Map<String, User>> genericTypeIndicator = new GenericTypeIndicator<Map<String, User>>() {
                 };
                 if (dataSnapshot.getValue(genericTypeIndicator) != null) {
-                    Collection<User> userList = dataSnapshot.getValue(genericTypeIndicator).values();
+                    Collection<User> userCollection = dataSnapshot.getValue(genericTypeIndicator).values();
+
+                    List<User> userList = new ArrayList<>(userCollection);
+
+                    // Ordenar lista de usuarios
+                    Collections.sort(userList, new Comparator<User>() {
+                        @Override
+                        public int compare(User item1, User item2) {
+                            return item2.getDate().compareTo(item1.getDate());
+                        }
+                    });
+                    SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy HH:mm");
                     for (User user : userList) {
-                        text.setText(text.getText() + "\nPeso: " + user.getPeso() + "\nAltura: " + user.getAltura() + "\nData: " + user.getDate() + "\n");
+                        text.setText(text.getText() + "\nPeso: " + user.getPeso() + "\nAltura: " + user.getAltura() + "\nData: " +   sdf.format(user.getDate()) + "\n");
                     }
                 }
             }
@@ -114,10 +131,10 @@ public class MainActivity extends AppCompatActivity {
         });
 
         // Create a storage reference from our app
-        StorageReference storageRef = storage.getReference();
+        storageRef = storage.getReference();
 
         // Create a child reference
-        StorageReference imagesRef = storageRef.child(mAuth.getUid());
+        imagesRef = storageRef.child(mAuth.getUid());
 
         imagesRef.getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
             @Override
@@ -141,7 +158,6 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void salvarDados() {
-
         final User user = new User();
         EditText pesoEdit = findViewById(R.id.editext_peso_id);
         user.setPeso(Double.parseDouble(pesoEdit.getText().toString()));
@@ -168,10 +184,10 @@ public class MainActivity extends AppCompatActivity {
             byte[] dataBytes = baos.toByteArray();
 
             // Create a storage reference from our app
-            StorageReference storageRef = storage.getReference();
+            storageRef = storage.getReference();
 
             // Create a child reference
-            StorageReference imagesRef = storageRef.child(mAuth.getUid());
+            imagesRef = storageRef.child(mAuth.getUid());
 
             UploadTask uploadTask = imagesRef.putBytes(dataBytes);
             uploadTask.addOnFailureListener(new OnFailureListener() {

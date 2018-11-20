@@ -54,11 +54,15 @@
         android:text="SALVAR"
         android:id="@+id/button_salvar_id"/>
 
-    <TextView
+    <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_weight="1"
-        android:id="@+id/text_firebase_data_id"/>
+        android:layout_height="0dp"
+        android:layout_weight="1">
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/text_firebase_data_id"/>
+    </ScrollView>
 
     <Button
         android:layout_width="match_parent"
