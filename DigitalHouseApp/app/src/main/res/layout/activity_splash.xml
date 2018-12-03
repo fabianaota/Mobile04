@@ -12,6 +12,7 @@
         android:layout_height="match_parent"
         android:scaleType="centerCrop"
         android:src="@drawable/splash_img"
+        android:id="@+id/image_splash_id"
         />
 
 </FrameLayout>

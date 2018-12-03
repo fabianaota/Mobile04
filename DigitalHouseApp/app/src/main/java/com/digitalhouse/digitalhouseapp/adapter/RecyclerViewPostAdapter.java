@@ -5,6 +5,8 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -43,6 +45,10 @@ public class RecyclerViewPostAdapter extends RecyclerView.Adapter<RecyclerViewPo
         // em seguida um novo ViewHolder é instanciado
         View view = LayoutInflater.from(viewGroup.getContext()).inflate(R.layout
                 .content_post_item, viewGroup, false);
+
+        Animation animation = AnimationUtils.loadAnimation(view.getContext(), R.anim.slide_in_left);
+        view.setAnimation(animation);
+
         return new ViewHolder(view);
     }
 

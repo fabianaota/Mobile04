@@ -1,22 +1,71 @@
 package com.digitalhouse.digitalhouseapp;
 
+import android.animation.Animator;
 import android.content.Intent;
 import android.support.design.widget.Snackbar;
 import android.support.design.widget.TextInputEditText;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
+import android.view.ViewPropertyAnimator;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.Toast;
 
 public class LoginActivity extends AppCompatActivity {
 
     public static final String CHAVE_EMAIL = "chave_email";
+    private ImageView imageLogo;
+    private ViewPropertyAnimator animate;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
+
+        imageLogo = findViewById(R.id.image_logo_id);
+
+        animate = imageLogo.animate();
+
+        animate.setDuration(500)
+                .scaleXBy(-0.5F)
+                .scaleYBy(-0.5F)
+                .withEndAction(scaleUp())
+                .start();
+
+        imageLogo.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                animate.cancel();
+            }
+        });
+
+    }
+
+    private Runnable scaleUp() {
+        return new Runnable() {
+            @Override
+            public void run() {
+                animate.setDuration(500)
+                        .scaleXBy(0.5F)
+                        .scaleYBy(0.5F)
+                        .withEndAction(scaleDown())
+                        .start();
+            }
+        };
+    }
+
+    private Runnable scaleDown() {
+        return new Runnable() {
+            @Override
+            public void run() {
+                animate.setDuration(500)
+                        .scaleXBy(-0.5F)
+                        .scaleYBy(-0.5F)
+                        .withEndAction(scaleUp())
+                        .start();
+            }
+        };
     }
 
     // Metodo definido no onClick do XML (activity_login.xml)

@@ -17,6 +17,7 @@
             android:layout_height="100dp"
             android:src="@drawable/logo"
             app:civ_border_color="@color/colorPrimary"
+            android:id="@+id/image_logo_id"
             app:civ_border_width="1dp" />
 
         <android.support.design.widget.TextInputLayout

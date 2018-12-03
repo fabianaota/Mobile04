@@ -78,6 +78,8 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
+        // TODO implementar Auth
+
         Button button = findViewById(R.id.button_salvar_id);
         button.setOnClickListener(new View.OnClickListener() {
             @Override
