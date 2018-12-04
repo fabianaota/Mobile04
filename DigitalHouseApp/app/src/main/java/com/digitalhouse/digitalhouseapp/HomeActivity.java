@@ -133,8 +133,8 @@ public class HomeActivity extends AppCompatActivity
         } else if (id == R.id.nav_people) {
             viewPager.setCurrentItem(1);
         } else if (id == R.id.nav_location){
-            Intent intent = new Intent(this, MapsActivity.class);
-            startActivity(intent);
+//            Intent intent = new Intent(this, MapsActivity.class);
+//            startActivity(intent);
         }
 
         DrawerLayout drawer = findViewById(R.id.drawer_layout);
