@@ -1,11 +1,3 @@
-# Mobile04-Android
+## Mobile 04
 
-## Entendendo e aplicando conceitos do ANDROID 
-
-### Links 
-#### Download Java JDK: http://www.oracle.com/technetwork/java/javase/downloads/jdk8-downloads-2133151.html
-#### Download GIT: https://git-scm.com/download/
-#### Download GITKRAKEN: https://www.gitkraken.com/download
-#### ANDROID GUIDE: https://developer.android.com/guide/
-#### Download ANDROID STUDIO: https://developer.android.com/studio/
-#### Download ANDROID SDK: https://developer.android.com/studio/#command-tools
+#### Exemplos de aplicativos do curso de Mobile Android da Digital House Brasil
